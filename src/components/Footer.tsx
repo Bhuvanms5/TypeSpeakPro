@@ -41,7 +41,7 @@ const Footer = () => {
             <p className="text-muted-foreground text-sm leading-relaxed max-w-xs mb-6">
               The all-in-one platform to improve your typing speed and communication skills for interviews, placements, and professional growth.
             </p>
-            
+
             {/* Social Links */}
             <div className="flex gap-3">
               <a
@@ -121,12 +121,12 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-16 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="mt-16 pt-8 border-t border-border flex flex-col items-center justify-center gap-4 text-center">
           <p className="text-muted-foreground text-sm">
-            © 2025 TypeSpeak Pro. All rights reserved.
+            2025 TypeSpeak Pro. All rights reserved.
           </p>
           <p className="text-muted-foreground text-sm">
-            Made with ❤️ for learners worldwide
+            Made with ❤️ Stufal
           </p>
         </div>
       </div>
