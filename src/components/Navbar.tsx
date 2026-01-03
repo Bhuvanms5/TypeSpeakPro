@@ -37,7 +37,7 @@ const Navbar = ({ forceOpaque = false }: NavbarProps) => {
 
   const navLinks = [
     { href: '/', label: 'Home' },
-    { href: '/#how-it-works', label: 'How It Works' },
+
     { href: '/practice', label: 'Typing Test' },
     { href: '/#voice', label: 'Voice Practice', isComingSoon: true },
     { href: '/#benefits', label: 'Benefits' },

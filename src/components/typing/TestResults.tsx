@@ -265,4 +265,3 @@ const TestResults = ({ open, onOpenChange, stats, onRestart }: TestResultsProps)
 };
 
 export default TestResults;
-

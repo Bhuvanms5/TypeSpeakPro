@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
-import { RotateCcw, Hash, Type, AlignLeft, type LucideIcon, Pilcrow, Trophy } from 'lucide-react';
+import { RotateCcw, Hash, Type, AlignLeft, type LucideIcon, Pilcrow, Trophy, Users } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import {
     Tooltip,
@@ -169,6 +169,8 @@ interface TypingTestProps {
     onComplete?: (stats: { wpm: number; accuracy: number; errorCount: number }) => void;
 }
 
+import MultiplayerModal from './MultiplayerModal';
+
 const TypingTest = ({ onComplete }: TypingTestProps) => {
     const [targetText, setTargetText] = useState('');
     const [userInput, setUserInput] = useState('');
@@ -187,6 +189,7 @@ const TypingTest = ({ onComplete }: TypingTestProps) => {
     const [includePunctuation, setIncludePunctuation] = useState(false);
 
     const [isFinished, setIsFinished] = useState(false);
+    const [isMultiplayerOpen, setIsMultiplayerOpen] = useState(false);
     const [history, setHistory] = useState<{ time: number; wpm: number; raw: number }[]>([]);
 
     const inputRef = useRef<HTMLInputElement>(null);
@@ -275,7 +278,6 @@ const TypingTest = ({ onComplete }: TypingTestProps) => {
         setIsFinished(true);
 
         // Save to Supabase if user is logged in
-        // Save to Supabase if user is logged in
         console.log("EndTest called. User:", user);
 
         if (user?.id) {
@@ -303,15 +305,12 @@ const TypingTest = ({ onComplete }: TypingTestProps) => {
 
                 if (error) {
                     console.error("Supabase SAVE ERROR:", error);
-                    // Don't toast error to user if it's just a config issue, maybe silent fail or debug log
-                    // toast.error(`Failed to save history: ${error.message}`); 
                 } else {
                     console.log("Result saved successfully!", data);
                     toast.success("Result saved to history!");
                 }
             } catch (err) {
                 console.error("Unexpected error saving result:", err);
-                // Prevent crash
             }
         } else {
             console.warn("User ID missing, cannot save result. User object:", user);
@@ -334,8 +333,6 @@ const TypingTest = ({ onComplete }: TypingTestProps) => {
         }
 
         setUserInput(value);
-
-        // Auto-scroll logic if needed (already implemented via useEffect below)
     };
 
     const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -445,6 +442,23 @@ const TypingTest = ({ onComplete }: TypingTestProps) => {
                         </TooltipTrigger>
                         <TooltipContent side="right">
                             <p>Leaderboard</p>
+                        </TooltipContent>
+                    </Tooltip>
+                </TooltipProvider>
+
+                {/* Right Side: Invite / Multiplayer Button */}
+                <TooltipProvider>
+                    <Tooltip>
+                        <TooltipTrigger asChild>
+                            <button
+                                onClick={() => setIsMultiplayerOpen(true)}
+                                className="absolute -right-20 top-2 p-3 rounded-full bg-white/5 border border-white/10 text-neutral-400 hover:text-teal-400 hover:bg-teal-400/10 hover:border-teal-400/20 transition-all duration-300 group shadow-lg shadow-black/20"
+                            >
+                                <Users className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                            </button>
+                        </TooltipTrigger>
+                        <TooltipContent side="left">
+                            <p>Challenge a Friend</p>
                         </TooltipContent>
                     </Tooltip>
                 </TooltipProvider>
@@ -596,6 +610,9 @@ const TypingTest = ({ onComplete }: TypingTestProps) => {
                 onRestart={resetTest}
             />
 
+            {/* Multiplayer Modal */}
+            <MultiplayerModal open={isMultiplayerOpen} onOpenChange={setIsMultiplayerOpen} />
+
             {/* Typing Area - 5 Lines Fixed Height (approx 20rem/320px) with overflow-hidden */}
             <div
                 ref={containerRef}
@@ -627,8 +644,6 @@ const TypingTest = ({ onComplete }: TypingTestProps) => {
                     disabled={isFinished}
                 />
             </div>
-
-            {/* Results Modal Overlay */}
 
 
             <div className="flex justify-center pt-8">

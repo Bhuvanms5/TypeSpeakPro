@@ -126,7 +126,7 @@ const Footer = () => {
             2025 TypeSpeak Pro. All rights reserved.
           </p>
           <p className="text-muted-foreground text-sm">
-            Made with ❤️ Stufal
+            Made with ❤️ Sufal
           </p>
         </div>
       </div>
