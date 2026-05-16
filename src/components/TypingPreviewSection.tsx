@@ -29,6 +29,11 @@ const TypingPreviewSection = () => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (currentIndex >= sampleText.length) return;
 
+      // Prevent spacebar from scrolling the page while the test is active
+      if (e.key === ' ') {
+        e.preventDefault();
+      }
+
       if (e.key === sampleText[currentIndex]) {
         setCurrentIndex(prev => prev + 1);
 

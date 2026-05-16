@@ -31,7 +31,7 @@ const WelcomeVideoModal = () => {
 
     return (
         <Dialog open={isOpen} onOpenChange={handleClose}>
-            <DialogContent className="sm:max-w-md bg-neutral-900/90 border-white/10 backdrop-blur-xl text-white p-0 overflow-hidden shadow-2xl animate-in zoom-in-95 duration-500">
+            <DialogContent className="sm:max-w-md bg-neutral-900/90 border-white/10 backdrop-blur-xl text-white p-0 overflow-hidden shadow-2xl animate-in zoom-in-95 duration-500 [&>button]:hidden">
                 {/* Visual Header */}
                 <div className="relative h-48 bg-gradient-to-br from-teal-500/20 via-purple-500/20 to-neutral-900 flex items-center justify-center overflow-hidden">
                     <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-20 filter blur-sm"></div>
