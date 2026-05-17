@@ -1,4 +1,4 @@
-import { Keyboard, Mic, Github, Linkedin, Twitter } from 'lucide-react';
+import { Github, Linkedin, Twitter } from 'lucide-react';
 
 const Footer = () => {
   const quickLinks = [
@@ -29,8 +29,7 @@ const Footer = () => {
           <div className="col-span-2 lg:col-span-2">
             <a href="#" className="flex items-center gap-2 mb-4">
               <div className="relative">
-                <Keyboard className="w-8 h-8 text-primary" />
-                <Mic className="w-4 h-4 text-accent absolute -bottom-1 -right-1" />
+                <img src="logo.jpg" alt="logo" className="h-8 w-8 object-contain rounded" />
               </div>
               <span className="text-xl font-bold">
                 <span className="text-foreground">Type</span>
